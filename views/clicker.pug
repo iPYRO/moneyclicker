@@ -1,0 +1,53 @@
+extends layout
+block content
+
+  h1 Game by iPyro
+  h2 Some ideas from whitefire_gaming
+  h3 Press The Dollar to earn $1
+  button(onclick='give1m();') debug
+  img(src='http://www.anarchism.net/images/dollar.gif', onclick='addMoney();')
+
+  button(onclick='upgrade1();') x2 in one
+  button(onclick='intervalM();') +0.1
+  h3.balance1
+
+  script.
+    var money = 0;
+    var mpc = 1;
+    var click = 0.1;
+    function give1m() {
+      money += 100;
+      updateMoney();
+    }
+    function addMoney() {
+      money += mpc;
+      updateMoney();
+    }
+    function alertMoney() {
+      alert("$" + money);
+      updateMoney();
+    }
+    function upgrade1() {
+      if(money < 100) {
+        alert("You need more money");
+      }
+      if(money > 99) {
+        money -= 100;
+        mpc += 1;
+      }
+      updateMoney();
+    }
+    function upgrade2() {
+      if(money < 15) {
+        alert("You need more money");
+      }
+    }
+    function intervalM() {
+      setTimeout(intervalM, 1000);
+      money+=0.1*mpc;
+      updateMoney();
+    }
+    function updateMoney() {
+      document.querySelector('.balance1').innerHTML = 'Your balance: $'+Number(Math.round(money+'e'+ 2) +'e-2').toFixed(2);
+    }
+    updateMoney();
